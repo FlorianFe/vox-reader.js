@@ -1,5 +1,5 @@
 # vox-reader
-npm module for reading .vox files
+npm module for reading [.vox](https://github.com/ephtracy/voxel-model/blob/master/MagicaVoxel-file-format-vox.txt) files which can be exported in [MagickaVoxel](https://ephtracy.github.io/). 
 
  ```bash
 npm install --save vox-reader
