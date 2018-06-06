@@ -6,6 +6,7 @@ npm install --save vox-reader
 ```
 
  ```js
+const fs = require('fs');
 const readVox = require('vox-reader');
 
 fs.readFile('my-voxel-art.vox', (error, buffer) =>
