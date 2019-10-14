@@ -5,6 +5,7 @@ const groupArray = require('./shared/groupArray/groupArray');
 
 const readRiffFile = require('./readRiffFile/readRiffFile');
 const parseVoxChunk = require('./parseVoxChunk/parseVoxChunk');
+const removeRiffStructure = require('./removeRiffStructure/removeRiffStructure');
 
 
 const readVox = (buffer) =>
@@ -21,7 +22,8 @@ const readVox = (buffer) =>
   if(id != 'VOX ') throw Error(`Id of .vox-file should be "VOX ", found "${id}".`);
   if(version != 150) throw Error(`Version of .vox-file structure should be 150, found "${version}".`);
 
-  const result = readRiffFile(data, OFFSET, parseVoxChunk);
+  const riffData = readRiffFile(data, OFFSET, parseVoxChunk);
+  const result = removeRiffStructure(riffData);
 
   return result;
 }
