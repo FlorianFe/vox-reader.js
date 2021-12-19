@@ -1,5 +1,5 @@
 # vox-reader
-npm module for reading [.vox](https://github.com/ephtracy/voxel-model/blob/master/MagicaVoxel-file-format-vox.txt) files which can be exported in [MagickaVoxel](https://ephtracy.github.io/). 
+npm module for reading [.vox](https://github.com/ephtracy/voxel-model/blob/master/MagicaVoxel-file-format-vox.txt) files which can be exported in [MagickaVoxel](https://ephtracy.github.io/). It's the inverse function to [vox-saver.js](https://github.com/FlorianFe/vox-saver.js)
 
 ## 💾 Installation
 
