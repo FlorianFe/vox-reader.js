@@ -1,25 +1,32 @@
 {
   "name": "vox-reader",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "description": "Takes a Byte Array of .vox file data and returns a JavaScript Object with all the containing informations",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "node test/readVox.test.js"
+    "compile": "tsc",
+    "test": "tsc && ava"
   },
   "keywords": [
     "voxel",
     "magickavoxel",
     "vox",
     "file",
-    "reader"
+    "reader",
+    "loader"
   ],
-  "repository": 
-  {
+  "repository": {
     "type": "git",
     "url": "https://github.com/florianfe/vox-reader.js.git"
   },
   "author": "Florian Fechner",
   "license": "MIT",
-  "dependencies": {}
+  "devDependencies": {
+    "@types/node": "^17.0.8",
+    "ava": "^4.0.1",
+    "json-diff": "^0.7.1",
+    "typescript": "^4.5.4",
+    "vox-saver": "^1.1.0"
+  }
 }
