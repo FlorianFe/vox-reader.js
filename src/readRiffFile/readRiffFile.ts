@@ -1,9 +1,12 @@
-"use strict";
+
 const readChunks = require('./readChunks/readChunks');
-const readRiffFile = (buffer, offset, parser) => {
+
+const readRiffFile = (buffer : Array<number> | Buffer, offset : number, parser : Function) =>
+{
     const dataWithoutOffset = buffer.slice(offset);
     const chunks = readChunks(dataWithoutOffset, parser);
+
     return chunks[0];
-};
-module.exports = readRiffFile;
-//# sourceMappingURL=readRiffFile.js.map
+}
+
+export = readRiffFile;
