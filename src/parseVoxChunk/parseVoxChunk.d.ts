@@ -59,13 +59,13 @@ declare const parseVoxChunk: (id: string, contentData: Array<number>) => {
     numVoxels?: undefined;
     values?: undefined;
 } | {
+    id: string;
+    values: number[];
     numModels?: undefined;
     x?: undefined;
     y?: undefined;
     z?: undefined;
     numVoxels?: undefined;
-    values?: undefined;
-    id?: undefined;
     materialType?: undefined;
     materialWeight?: undefined;
     propertyBits?: undefined;

@@ -10,6 +10,7 @@ const parseVoxChunk = (id : string, contentData : Array<number>) =>
 {
   const tokens = groupArray(contentData, BLOCK_SIZE);
 
+  // base https://github.com/ephtracy/voxel-model/blob/master/MagicaVoxel-file-format-vox.txt
   if(id === 'PACK') return {
     numModels: read4ByteInteger(tokens[0])
   };
@@ -32,17 +33,30 @@ const parseVoxChunk = (id : string, contentData : Array<number>) =>
       .map((c : Array<number>) => ({ r: c[0], g: c[1], b: c[2], a: c[3] }))
   }
 
-  if(id === 'MATT') return {
-    id: read4ByteInteger(tokens[0]),
-    materialType: read4ByteInteger(tokens[1]),
-    materialWeight: read4ByteFloat(tokens[2]),
-    propertyBits: read4ByteInteger(tokens[3]),
-    normalizedPropertyValues: tokens
-      .slice(4)
-      .map((token : number) => read4ByteFloat(token))
+  // extended https://github.com/ephtracy/voxel-model/blob/master/MagicaVoxel-file-format-vox-extension.txt
+  // if(id === 'nTRN') return {
+  //   nodeId: read4ByteInteger(tokens[0]),
+  //   attributes: readDict()
+  // }
+
+  if(id === 'MATT') {
+    console.warn('MATT is deprecated, use MATL instead');
+    return {
+      id: read4ByteInteger(tokens[0]),
+      materialType: read4ByteInteger(tokens[1]),
+      materialWeight: read4ByteFloat(tokens[2]),
+      propertyBits: read4ByteInteger(tokens[3]),
+      normalizedPropertyValues: tokens
+        .slice(4)
+        .map((token : number) => read4ByteFloat(token))
+    }
   }
 
-  return {};
+
+
+
+  
+  return {id,values:contentData};
 }
 
 export = parseVoxChunk;
