@@ -1,5 +1,5 @@
 
-const read4ByteString = require('./shared/read4ByteString/read4ByteString');
+const readString = require('./shared/readString/readString');
 const read4ByteInteger = require('./shared/read4ByteInteger/read4ByteInteger');
 const groupArray = require('./shared/groupArray/groupArray');
 
@@ -16,7 +16,7 @@ const readVox = (buffer : Array<number> | Buffer) : VoxStructure =>
   const data = [...buffer]; // convert buffer to array
   const tokens = groupArray(data, BLOCK_SIZE);
 
-  const id = read4ByteString(tokens[0]);
+  const id = readString(tokens[0]);
   const version = read4ByteInteger(tokens[1]);
 
   if(id != 'VOX ') throw Error(`Id of .vox-file should be "VOX ", found "${id}".`);

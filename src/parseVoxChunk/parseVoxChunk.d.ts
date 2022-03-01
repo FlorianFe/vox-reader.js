@@ -5,6 +5,8 @@ declare const parseVoxChunk: (id: string, contentData: Array<number>) => {
     z?: undefined;
     numVoxels?: undefined;
     values?: undefined;
+    nodeId?: undefined;
+    attributes?: undefined;
     id?: undefined;
     materialType?: undefined;
     materialWeight?: undefined;
@@ -17,6 +19,8 @@ declare const parseVoxChunk: (id: string, contentData: Array<number>) => {
     numModels?: undefined;
     numVoxels?: undefined;
     values?: undefined;
+    nodeId?: undefined;
+    attributes?: undefined;
     id?: undefined;
     materialType?: undefined;
     materialWeight?: undefined;
@@ -29,6 +33,8 @@ declare const parseVoxChunk: (id: string, contentData: Array<number>) => {
     x?: undefined;
     y?: undefined;
     z?: undefined;
+    nodeId?: undefined;
+    attributes?: undefined;
     id?: undefined;
     materialType?: undefined;
     materialWeight?: undefined;
@@ -41,6 +47,22 @@ declare const parseVoxChunk: (id: string, contentData: Array<number>) => {
     y?: undefined;
     z?: undefined;
     numVoxels?: undefined;
+    nodeId?: undefined;
+    attributes?: undefined;
+    id?: undefined;
+    materialType?: undefined;
+    materialWeight?: undefined;
+    propertyBits?: undefined;
+    normalizedPropertyValues?: undefined;
+} | {
+    nodeId: any;
+    attributes: any;
+    numModels?: undefined;
+    x?: undefined;
+    y?: undefined;
+    z?: undefined;
+    numVoxels?: undefined;
+    values?: undefined;
     id?: undefined;
     materialType?: undefined;
     materialWeight?: undefined;
@@ -58,6 +80,8 @@ declare const parseVoxChunk: (id: string, contentData: Array<number>) => {
     z?: undefined;
     numVoxels?: undefined;
     values?: undefined;
+    nodeId?: undefined;
+    attributes?: undefined;
 } | {
     id: string;
     values: number[];
@@ -66,6 +90,8 @@ declare const parseVoxChunk: (id: string, contentData: Array<number>) => {
     y?: undefined;
     z?: undefined;
     numVoxels?: undefined;
+    nodeId?: undefined;
+    attributes?: undefined;
     materialType?: undefined;
     materialWeight?: undefined;
     propertyBits?: undefined;

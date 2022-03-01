@@ -1,5 +1,5 @@
 
-const read4ByteString = require('../../shared/read4ByteString/read4ByteString');
+const readString = require('../../shared/readString/readString');
 const read4ByteInteger = require('../../shared/read4ByteInteger/read4ByteInteger');
 const groupArray = require('../../shared/groupArray/groupArray');
 
@@ -21,7 +21,7 @@ const readChunks = (data : Array<number>, parser: Function) =>
     const headerData = data.slice(0, HEADER_SIZE);
     const header = groupArray(headerData, BLOCK_SIZE);
 
-    const chunkId = read4ByteString(header[0]);
+    const chunkId = readString(header[0]);
     const contentBytes = read4ByteInteger(header[1]);
     const childrenBytes = read4ByteInteger(header[2]);
 
