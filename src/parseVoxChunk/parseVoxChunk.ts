@@ -42,23 +42,22 @@ const BLOCK_SIZE = 4;
 // };
 const flatten = (array : Array<any>) =>
   [].concat.apply([], array);
-const readDict = (tokens: any[]) => {
+const readDict = (contentData: number[]) => {
   const dict: any = {};
   let i = 0
-  const amount = read4ByteInteger(tokens[i])
+  
+  const amount = read4ByteInteger(contentData.splice(0,4)) // amount of key-value pairs
   while(i < amount) {
-    const keyLength = read4ByteInteger(tokens[++i]);
-    const key = readString(flatten(tokens.slice(i, i + keyLength)));
-    i += keyLength;
-    const valueLength = read4ByteInteger(tokens[++i]);
-    const value = readString(flatten(tokens.slice(i, i + valueLength)));
-    i += valueLength;
+    const keyLength = read4ByteInteger(contentData.splice(0,4));
+    const key = readString(flatten(contentData.splice(0,keyLength))); // wrong calculation, has to be done using bytes and not 'tokens'
+    
+    const valueLength = read4ByteInteger(contentData.splice(0,4));
+    const value = readString(contentData.splice(0,valueLength));
+    i++;
     dict[key] = value;
   }
-  const test = tokens.map((token: number[]) => readString(token));
-  console.log(dict);
   return dict
-}  
+}
 
 const parseVoxChunk = (id : string, contentData : Array<number>) =>
 {
@@ -90,11 +89,96 @@ const parseVoxChunk = (id : string, contentData : Array<number>) =>
   // extended https://github.com/ephtracy/voxel-model/blob/master/MagicaVoxel-file-format-vox-extension.txt
   if(id === 'nTRN') {
     const test = tokens.map((token: number[]) => read4ByteInteger(token));
-    return {
-    nodeId: read4ByteInteger(tokens[0]),
-    attributes: readDict(tokens)
-  }}
-
+    const obj: {
+      nodeId: number,
+      nodeAttributes: any,
+      child: number,
+      reserved: number,
+      layer: number,
+      numFrames: number,
+      frameAttributes: any[],
+    } = {
+    nodeId: read4ByteInteger(contentData.splice(0,4)),
+    nodeAttributes: readDict(contentData),
+    child: read4ByteInteger(contentData.splice(0,4)),
+    reserved: read4ByteInteger(contentData.splice(0,4)),
+    layer: read4ByteInteger(contentData.splice(0,4)),
+    numFrames: read4ByteInteger(contentData.splice(0,4)),
+    frameAttributes: [],
+  }
+  for(let i = 0; i < obj.numFrames; i++) {
+    obj.frameAttributes.push(readDict(contentData));
+  }
+  return obj;
+  }
+  if (id === 'nGRP') {
+    const obj: {
+      nodeId: number,
+      nodeAttributes: any,
+      child: number,
+      children: number[],
+    } = {
+    nodeId: read4ByteInteger(contentData.splice(0,4)),
+    nodeAttributes: readDict(contentData),
+    child: read4ByteInteger(contentData.splice(0,4)),
+    children: [],
+  }
+    for(let i = 0; i < obj.child; i++) {
+      obj.children.push(read4ByteInteger(contentData.splice(0,4)));
+    }
+    return obj;
+  }
+  if (id === 'nSHP') {
+    const obj: {
+      nodeId: number,
+      nodeAttributes: any,
+      numModels: number,
+      models: any[],
+    } = {
+    nodeId: read4ByteInteger(contentData.splice(0,4)),
+    nodeAttributes: readDict(contentData),
+    numModels: read4ByteInteger(contentData.splice(0,4)),
+    models: [],
+  }
+    for(let i = 0; i < obj.numModels; i++) {
+      obj.models.push(readDict(contentData));
+    }
+    return obj;
+  }
+  if (id === 'MATL') return {
+      materialId: read4ByteInteger(contentData.splice(0,4)),
+      materialProperties: readDict(contentData),
+    }
+  if(id === 'LAYR') return {
+    layerId: read4ByteInteger(contentData.splice(0,4)),
+    layerAttributes: readDict(contentData),
+    reservedId: read4ByteInteger(contentData.splice(0,4)),
+  }
+  
+  if(id === 'rOBJ') return {
+    renderAttributes: readDict(contentData),
+  }
+	if (id === 'rCAM') return {
+    cameraId: read4ByteInteger(contentData.splice(0,4)),
+    cameraAttributes: readDict(contentData),
+  }
+	if (id === 'NOTE') {
+    const obj: {
+      numColorNames: number,
+      colorNames: string[],
+    } = {
+    numColorNames: read4ByteInteger(contentData.splice(0,4)),
+    colorNames: [],
+    }
+    for(let i = 0; i < obj.numColorNames; i++) {
+      obj.colorNames.push(readString(contentData));
+    }
+    return obj;
+  }
+  if (id === 'IMAP') return {
+    size: read4ByteInteger(contentData.splice(0,4)),
+    indexAssociations: contentData.splice(0,256).map((c: number) => read4ByteInteger(c)),
+  }
   if(id === 'MATT') {
     console.warn('MATT is deprecated, use MATL instead');
     return {
@@ -110,9 +194,7 @@ const parseVoxChunk = (id : string, contentData : Array<number>) =>
 
 
 
-
-  
-  return {id,values:contentData};
+  return {};
 }
 
 export = parseVoxChunk;
