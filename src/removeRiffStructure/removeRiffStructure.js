@@ -2,7 +2,11 @@
 const removeRiffStructure = (riffObject) => {
     let result = {};
     riffObject.children.forEach((child) => {
-        result[child.id.toLowerCase()] = removeRiffStructure(child);
+        let list = result[child.id];
+        if (!list)
+            list = [];
+        list.push(removeRiffStructure(child));
+        result[child.id] = list;
     });
     Object.entries(riffObject.data).forEach(([key, value]) => {
         result[key] = value;

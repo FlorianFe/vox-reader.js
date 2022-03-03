@@ -22,13 +22,12 @@ const { diff } = require("json-diff")
 test('test extended.vox', (t : any) => 
 {
     const buffer = fs.readFileSync('./test/extended.vox')
-
-    console.log(util.inspect(readVox(buffer), false, null, true))
-
     const vox = readVox(buffer)
-    const writtenVox = readVox(writeVox(vox))
-    fs.writeFileSync('./test/extended-out.vox', Buffer.from(writeVox(vox)))
-    t.assert(diff(vox, writtenVox) === undefined, "vox-reader and vox-writer should be the same (handling extended files)");
+    console.log(util.inspect(vox, false, null, true))
+    const writtenVox = writeVox(vox)
+    const validationVox = readVox(writtenVox)
+    fs.writeFileSync('./test/extended-out.vox', Buffer.from(writtenVox))
+    t.assert(diff(vox, validationVox) === undefined, "vox-reader and vox-writer should be the same (handling extended files)");
     
     t.pass();
 });

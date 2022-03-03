@@ -1,6 +1,6 @@
 "use strict";
 const readString = require('../../shared/readString/readString');
-const read4ByteInteger = require('../../shared/read4ByteInteger/read4ByteInteger');
+const readInt = require('../../shared/readInt/readInt');
 const groupArray = require('../../shared/groupArray/groupArray');
 const BLOCK_SIZE = 4;
 const HEADER_SIZE = 12;
@@ -10,8 +10,8 @@ const readChunks = (data, parser) => {
         const headerData = data.slice(0, HEADER_SIZE);
         const header = groupArray(headerData, BLOCK_SIZE);
         const chunkId = readString(header[0]);
-        const contentBytes = read4ByteInteger(header[1]);
-        const childrenBytes = read4ByteInteger(header[2]);
+        const contentBytes = readInt(header[1]);
+        const childrenBytes = readInt(header[2]);
         chunks.push(createChunk(data, chunkId, contentBytes, childrenBytes, parser));
         data = data.slice(HEADER_SIZE + contentBytes);
     }

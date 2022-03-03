@@ -1,14 +1,22 @@
 declare const parseVoxChunk: (id: string, contentData: Array<number>) => {
     nodeId: number;
-    nodeAttributes: any;
+    nodeAttributes: {
+        _name: string;
+        _hidden?: 0 | 1 | undefined;
+    };
     child: number;
     reserved: number;
     layer: number;
     numFrames: number;
-    frameAttributes: any[];
+    frames: {
+        _t: string;
+    }[];
 } | {
     nodeId: number;
-    nodeAttributes: any;
+    nodeAttributes: {
+        _name: string;
+        _hidden?: 0 | 1 | undefined;
+    };
     child: number;
     children: number[];
 } | {
@@ -36,11 +44,6 @@ declare const parseVoxChunk: (id: string, contentData: Array<number>) => {
     cameraAttributes?: undefined;
     size?: undefined;
     indexAssociations?: undefined;
-    id?: undefined;
-    materialType?: undefined;
-    materialWeight?: undefined;
-    propertyBits?: undefined;
-    normalizedPropertyValues?: undefined;
 } | {
     x: any;
     y: any;
@@ -58,11 +61,6 @@ declare const parseVoxChunk: (id: string, contentData: Array<number>) => {
     cameraAttributes?: undefined;
     size?: undefined;
     indexAssociations?: undefined;
-    id?: undefined;
-    materialType?: undefined;
-    materialWeight?: undefined;
-    propertyBits?: undefined;
-    normalizedPropertyValues?: undefined;
 } | {
     numVoxels: any;
     values: any;
@@ -80,11 +78,6 @@ declare const parseVoxChunk: (id: string, contentData: Array<number>) => {
     cameraAttributes?: undefined;
     size?: undefined;
     indexAssociations?: undefined;
-    id?: undefined;
-    materialType?: undefined;
-    materialWeight?: undefined;
-    propertyBits?: undefined;
-    normalizedPropertyValues?: undefined;
 } | {
     values: any;
     numModels?: undefined;
@@ -102,11 +95,6 @@ declare const parseVoxChunk: (id: string, contentData: Array<number>) => {
     cameraAttributes?: undefined;
     size?: undefined;
     indexAssociations?: undefined;
-    id?: undefined;
-    materialType?: undefined;
-    materialWeight?: undefined;
-    propertyBits?: undefined;
-    normalizedPropertyValues?: undefined;
 } | {
     materialId: any;
     materialProperties: any;
@@ -124,11 +112,6 @@ declare const parseVoxChunk: (id: string, contentData: Array<number>) => {
     cameraAttributes?: undefined;
     size?: undefined;
     indexAssociations?: undefined;
-    id?: undefined;
-    materialType?: undefined;
-    materialWeight?: undefined;
-    propertyBits?: undefined;
-    normalizedPropertyValues?: undefined;
 } | {
     layerId: any;
     layerAttributes: any;
@@ -146,11 +129,6 @@ declare const parseVoxChunk: (id: string, contentData: Array<number>) => {
     cameraAttributes?: undefined;
     size?: undefined;
     indexAssociations?: undefined;
-    id?: undefined;
-    materialType?: undefined;
-    materialWeight?: undefined;
-    propertyBits?: undefined;
-    normalizedPropertyValues?: undefined;
 } | {
     renderAttributes: any;
     numModels?: undefined;
@@ -168,11 +146,6 @@ declare const parseVoxChunk: (id: string, contentData: Array<number>) => {
     cameraAttributes?: undefined;
     size?: undefined;
     indexAssociations?: undefined;
-    id?: undefined;
-    materialType?: undefined;
-    materialWeight?: undefined;
-    propertyBits?: undefined;
-    normalizedPropertyValues?: undefined;
 } | {
     cameraId: any;
     cameraAttributes: any;
@@ -190,11 +163,6 @@ declare const parseVoxChunk: (id: string, contentData: Array<number>) => {
     renderAttributes?: undefined;
     size?: undefined;
     indexAssociations?: undefined;
-    id?: undefined;
-    materialType?: undefined;
-    materialWeight?: undefined;
-    propertyBits?: undefined;
-    normalizedPropertyValues?: undefined;
 } | {
     size: any;
     indexAssociations: any[];
@@ -212,33 +180,6 @@ declare const parseVoxChunk: (id: string, contentData: Array<number>) => {
     renderAttributes?: undefined;
     cameraId?: undefined;
     cameraAttributes?: undefined;
-    id?: undefined;
-    materialType?: undefined;
-    materialWeight?: undefined;
-    propertyBits?: undefined;
-    normalizedPropertyValues?: undefined;
-} | {
-    id: any;
-    materialType: any;
-    materialWeight: any;
-    propertyBits: any;
-    normalizedPropertyValues: any;
-    numModels?: undefined;
-    x?: undefined;
-    y?: undefined;
-    z?: undefined;
-    numVoxels?: undefined;
-    values?: undefined;
-    materialId?: undefined;
-    materialProperties?: undefined;
-    layerId?: undefined;
-    layerAttributes?: undefined;
-    reservedId?: undefined;
-    renderAttributes?: undefined;
-    cameraId?: undefined;
-    cameraAttributes?: undefined;
-    size?: undefined;
-    indexAssociations?: undefined;
 } | {
     numModels?: undefined;
     x?: undefined;
@@ -256,10 +197,5 @@ declare const parseVoxChunk: (id: string, contentData: Array<number>) => {
     cameraAttributes?: undefined;
     size?: undefined;
     indexAssociations?: undefined;
-    id?: undefined;
-    materialType?: undefined;
-    materialWeight?: undefined;
-    propertyBits?: undefined;
-    normalizedPropertyValues?: undefined;
 };
 export = parseVoxChunk;
