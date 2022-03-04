@@ -25,6 +25,7 @@ test('test extended.vox', (t : any) =>
     const vox = readVox(buffer)
     console.log(util.inspect(vox, false, null, true))
     const writtenVox = writeVox(vox)
+
     const validationVox = readVox(writtenVox)
     fs.writeFileSync('./test/extended-out.vox', Buffer.from(writtenVox))
     t.assert(diff(vox, validationVox) === undefined, "vox-reader and vox-writer should be the same (handling extended files)");

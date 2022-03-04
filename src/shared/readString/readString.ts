@@ -4,3 +4,4 @@ const readString = (data : Array<number>) : string =>
       .join('');
 
 export = readString;
+// fix longer strings etc.

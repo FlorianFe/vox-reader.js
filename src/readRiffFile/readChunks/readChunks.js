@@ -10,6 +10,7 @@ const readChunks = (data, parser) => {
         const headerData = data.slice(0, HEADER_SIZE);
         const header = groupArray(headerData, BLOCK_SIZE);
         const chunkId = readString(header[0]);
+        const otherId = header[0].map((byte) => String.fromCharCode(byte)).join('');
         const contentBytes = readInt(header[1]);
         const childrenBytes = readInt(header[2]);
         chunks.push(createChunk(data, chunkId, contentBytes, childrenBytes, parser));

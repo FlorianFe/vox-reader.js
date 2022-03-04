@@ -21,7 +21,8 @@ const readChunks = (data : Array<number>, parser: Function) =>
     const headerData = data.slice(0, HEADER_SIZE);
     const header = groupArray(headerData, BLOCK_SIZE);
 
-    const chunkId = readString(header[0]);
+    const chunkId =  readString(header[0]) 
+    const otherId =  header[0].map((byte: number) => String.fromCharCode(byte)).join('');
     const contentBytes = readInt(header[1]);
     const childrenBytes = readInt(header[2]);
 
