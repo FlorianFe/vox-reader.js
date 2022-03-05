@@ -23,6 +23,7 @@
   "author": "Florian Fechner",
   "license": "MIT",
   "devDependencies": {
+    "@types/json-diff": "^0.7.0",
     "@types/node": "^17.0.8",
     "ava": "^4.0.1",
     "json-diff": "^0.7.1",

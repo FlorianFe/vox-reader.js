@@ -17,6 +17,7 @@ const readVox = (buffer) => {
     if (version != 150)
         throw Error(`Version of .vox-file structure should be 150, found "${version}".`);
     const riffData = readRiffFile(data, OFFSET, parseVoxChunk);
+    riffData.children = riffData.children.map((chunk, index) => (Object.assign(Object.assign({}, chunk), { index })));
     return removeRiffStructure(riffData);
 };
 module.exports = readVox;

@@ -1,4 +1,3 @@
-
 type PACK = {
     numModels: number;
 }
@@ -35,7 +34,7 @@ type frameAttributes = {
 
 type nodeAttributes = {
     _name: string,
-    _hidden?: 0 | 1,
+    _hidden?: string,
 }
 type nTRN = {
     nodeId: number,
@@ -52,14 +51,14 @@ type nGRP = {
     child: number,
     children: number[],
 }
-type modelAttributes = {
+type modelAttributes = [number,{
     _f: string,
-}
+}]
 type nSHP = {
     nodeId: number,
-      nodeAttributes: any,
-      numModels: number,
-      models: modelAttributes[],
+    nodeAttributes: any,
+    numModels: number,
+    models: modelAttributes[],
 }
 type MATL = {
     materialId: number,
@@ -67,7 +66,7 @@ type MATL = {
 }
 type layerAttributes = {
     _name: string,
-    _hidden?: 0 | 1,
+    _hidden?: string,
 }
 type LAYR = {
     layerId: number,

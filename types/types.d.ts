@@ -30,7 +30,7 @@ declare type frameAttributes = {
 };
 declare type nodeAttributes = {
     _name: string;
-    _hidden?: 0 | 1;
+    _hidden?: string;
 };
 declare type nTRN = {
     nodeId: number;
@@ -47,9 +47,12 @@ declare type nGRP = {
     child: number;
     children: number[];
 };
-declare type modelAttributes = {
-    _f: string;
-};
+declare type modelAttributes = [
+    number,
+    {
+        _f: string;
+    }
+];
 declare type nSHP = {
     nodeId: number;
     nodeAttributes: any;
@@ -62,7 +65,7 @@ declare type MATL = {
 };
 declare type layerAttributes = {
     _name: string;
-    _hidden?: 0 | 1;
+    _hidden?: string;
 };
 declare type LAYR = {
     layerId: number;

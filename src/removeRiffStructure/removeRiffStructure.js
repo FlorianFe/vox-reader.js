@@ -11,6 +11,7 @@ const removeRiffStructure = (riffObject) => {
     Object.entries(riffObject.data).forEach(([key, value]) => {
         result[key] = value;
     });
+    result.index = riffObject.index;
     return result;
 };
 module.exports = removeRiffStructure;

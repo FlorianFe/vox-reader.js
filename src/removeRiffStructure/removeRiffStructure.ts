@@ -3,6 +3,7 @@ type Node = {
     id: string,
     data: any,
     children: Array<Node>,
+    index: number,
 }
 
 type Result = {
@@ -25,7 +26,7 @@ const removeRiffStructure = (riffObject : Node) =>
     {
         result[key] = value;
     });
-
+    result.index = riffObject.index;
     return result;
 }
 

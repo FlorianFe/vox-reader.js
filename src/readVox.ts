@@ -23,7 +23,7 @@ const readVox = (buffer : Array<number> | Buffer) : VoxStructure =>
   if(version != 150) throw Error(`Version of .vox-file structure should be 150, found "${version}".`);
 
   const riffData = readRiffFile(data, OFFSET, parseVoxChunk);
-  
+  riffData.children = riffData.children.map((chunk: any, index: number) => ({ ...chunk, index }));
   return removeRiffStructure(riffData);
 }
 

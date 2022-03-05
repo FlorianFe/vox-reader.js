@@ -7,10 +7,10 @@ const flatten = (array) => [].concat.apply([], array);
 const readDict = (contentData) => {
     const dict = {};
     let i = 0;
-    const amount = readInt(contentData.splice(0, 4)); // amount of key-value pairs
+    const amount = readInt(contentData.splice(0, 4));
     while (i < amount) {
         const keyLength = readInt(contentData.splice(0, 4));
-        const key = readString(flatten(contentData.splice(0, keyLength))); // wrong calculation, has to be done using bytes and not 'tokens'
+        const key = readString(flatten(contentData.splice(0, keyLength)));
         const valueLength = readInt(contentData.splice(0, 4));
         const value = readString(contentData.splice(0, valueLength));
         i++;
@@ -25,12 +25,16 @@ const parseVoxChunk = (id, contentData) => {
         return {
             numModels: readInt(tokens[0])
         };
-    if (id === 'SIZE')
+    if (id === 'SIZE') {
+        if (!tokens[0]) {
+            console.log('SIZE chunk has no data');
+        }
         return {
             x: readInt(tokens[0]),
             y: readInt(tokens[1]),
             z: readInt(tokens[2])
         };
+    }
     if (id === 'XYZI')
         return {
             numVoxels: readInt(tokens[0]),
@@ -45,7 +49,6 @@ const parseVoxChunk = (id, contentData) => {
         };
     // extended https://github.com/ephtracy/voxel-model/blob/master/MagicaVoxel-file-format-vox-extension.txt
     if (id === 'nTRN') {
-        const test = tokens.map((token) => readInt(token));
         const obj = {
             nodeId: readInt(contentData.splice(0, 4)),
             nodeAttributes: readDict(contentData),
@@ -80,7 +83,7 @@ const parseVoxChunk = (id, contentData) => {
             models: [],
         };
         for (let i = 0; i < obj.numModels; i++) {
-            obj.models.push(readDict(contentData));
+            obj.models.push([readInt(contentData.splice(0, 4)), readDict(contentData)]);
         }
         return obj;
     }
@@ -110,15 +113,16 @@ const parseVoxChunk = (id, contentData) => {
             colorNames: [],
         };
         for (let i = 0; i < obj.numColorNames; i++) {
-            obj.colorNames.push(readString(contentData));
+            const stringLength = readInt(contentData.splice(0, 4));
+            obj.colorNames.push(readString(flatten(contentData.splice(0, stringLength))));
         }
         return obj;
     }
-    if (id === 'IMAP')
+    if (id === 'IMAP') {
         return {
-            size: readInt(contentData.splice(0, 4)),
-            indexAssociations: contentData.splice(0, 256).map((c) => readInt(c)),
+            indexAssociations: contentData.splice(0, 256),
         };
+    }
     return {};
 };
 module.exports = parseVoxChunk;
