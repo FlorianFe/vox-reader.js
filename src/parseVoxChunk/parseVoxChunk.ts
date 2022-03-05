@@ -1,6 +1,6 @@
-const readString = require("../shared/readString/readString");
-const readInt = require('../shared/readInt/readInt');
-const groupArray = require('../shared/groupArray/groupArray');
+import readString from "../shared/readString/readString";
+import readInt from '../shared/readInt/readInt';
+import groupArray from '../shared/groupArray/groupArray';
 
 const BLOCK_SIZE = 4;
 const flatten = (array : Array<any>) =>

@@ -95,6 +95,12 @@ declare type IMAP = {
     size: number;
     indexAssociations: number[];
 };
+declare type VoxNode = {
+    id: string;
+    data: any;
+    children: Array<VoxNode>;
+    index?: number;
+};
 declare type VoxStructure = {
     PACK?: PACK[];
     SIZE: SIZE[];

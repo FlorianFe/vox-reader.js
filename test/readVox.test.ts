@@ -2,8 +2,8 @@
 import fs from 'fs';
 import util from 'util';
 import test from 'ava';
-import readVox from '../index';
 import writeVox from 'vox-saver';
+import readVox from '../index';
 import { diff } from "json-diff";
 
 test('test deer.vox', (t : any) => 

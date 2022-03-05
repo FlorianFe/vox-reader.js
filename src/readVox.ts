@@ -1,11 +1,11 @@
 
-const readString = require('./shared/readString/readString');
-const readInt = require('./shared/readInt/readInt');
-const groupArray = require('./shared/groupArray/groupArray');
+import readString from './shared/readString/readString';
+import readInt from './shared/readInt/readInt';
+import groupArray from './shared/groupArray/groupArray';
 
-const readRiffFile = require('./readRiffFile/readRiffFile');
-const parseVoxChunk = require('./parseVoxChunk/parseVoxChunk');
-const removeRiffStructure = require('./removeRiffStructure/removeRiffStructure');
+import readRiffFile from './readRiffFile/readRiffFile';
+import parseVoxChunk from './parseVoxChunk/parseVoxChunk';
+import removeRiffStructure from './removeRiffStructure/removeRiffStructure';
 
 
 const readVox = (buffer : Array<number> | Buffer) : VoxStructure =>

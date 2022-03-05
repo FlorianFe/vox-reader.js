@@ -97,6 +97,13 @@ type IMAP = {
     indexAssociations: number[],
 }
 
+type VoxNode = {
+    id: string,
+    data: any,
+    children: Array<VoxNode>,
+    index?: number,
+}
+
 type VoxStructure = {
     PACK?: PACK[],
     SIZE: SIZE[],

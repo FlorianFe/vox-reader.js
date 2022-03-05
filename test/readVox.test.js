@@ -6,8 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const util_1 = __importDefault(require("util"));
 const ava_1 = __importDefault(require("ava"));
-const index_1 = __importDefault(require("../index"));
 const vox_saver_1 = __importDefault(require("vox-saver"));
+const index_1 = __importDefault(require("../index"));
 const json_diff_1 = require("json-diff");
 (0, ava_1.default)('test deer.vox', (t) => {
     const buffer = fs_1.default.readFileSync('./test/deer.vox');

@@ -1,20 +1,12 @@
 
-type Node = {
-    id: string,
-    data: any,
-    children: Array<Node>,
-    index: number,
-}
 
-type Result = {
-    [key: string]: any
-}
 
-const removeRiffStructure = (riffObject : Node) =>
+
+const removeRiffStructure = (riffObject : VoxNode) =>
 {
-    let result : Result = {};
+    let result : any = {};
 
-    riffObject.children.forEach((child : Node) => 
+    riffObject.children.forEach((child : VoxNode) => 
     {
         let list = result[child.id];
         if(!list) list = [];

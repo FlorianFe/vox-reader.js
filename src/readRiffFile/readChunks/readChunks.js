@@ -1,17 +1,20 @@
 "use strict";
-const readString = require('../../shared/readString/readString');
-const readInt = require('../../shared/readInt/readInt');
-const groupArray = require('../../shared/groupArray/groupArray');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+const readString_1 = __importDefault(require("../../shared/readString/readString"));
+const readInt_1 = __importDefault(require("../../shared/readInt/readInt"));
+const groupArray_1 = __importDefault(require("../../shared/groupArray/groupArray"));
 const BLOCK_SIZE = 4;
 const HEADER_SIZE = 12;
 const readChunks = (data, parser) => {
     let chunks = [];
     while (data.length != 0) {
         const headerData = data.slice(0, HEADER_SIZE);
-        const header = groupArray(headerData, BLOCK_SIZE);
-        const chunkId = readString(header[0]);
-        const contentBytes = readInt(header[1]);
-        const childrenBytes = readInt(header[2]);
+        const header = (0, groupArray_1.default)(headerData, BLOCK_SIZE);
+        const chunkId = (0, readString_1.default)(header[0]);
+        const contentBytes = (0, readInt_1.default)(header[1]);
+        const childrenBytes = (0, readInt_1.default)(header[2]);
         chunks.push(createChunk(data, chunkId, contentBytes, childrenBytes, parser));
         data = data.slice(HEADER_SIZE + contentBytes);
     }

@@ -1,16 +1,10 @@
 
-const readString = require('../../shared/readString/readString');
-const readInt = require('../../shared/readInt/readInt');
-const groupArray = require('../../shared/groupArray/groupArray');
+import readString from '../../shared/readString/readString';
+import readInt from '../../shared/readInt/readInt';
+import groupArray from '../../shared/groupArray/groupArray';
 
 const BLOCK_SIZE = 4;
 const HEADER_SIZE = 12;
-
-type Node = {
-  id: string,
-  data: any,
-  children: Array<Node>,
-}
 
 const readChunks = (data : Array<number>, parser: Function) =>
 {
@@ -33,7 +27,7 @@ const readChunks = (data : Array<number>, parser: Function) =>
   return chunks;
 }
 
-const createChunk = (data : Array<number>, id : string, contentBytes : number, childrenBytes : number, parser : Function) : Node =>
+const createChunk = (data : Array<number>, id : string, contentBytes : number, childrenBytes : number, parser : Function) : VoxNode =>
 {
   const contentDataEndIndex = HEADER_SIZE + contentBytes;
   const childrenDataEndIndex = contentDataEndIndex + childrenBytes;
