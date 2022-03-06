@@ -2,10 +2,10 @@
 import readString from './shared/readString/readString';
 import readInt from './shared/readInt/readInt';
 import groupArray from './shared/groupArray/groupArray';
-
 import readRiffFile from './readRiffFile/readRiffFile';
 import parseVoxChunk from './parseVoxChunk/parseVoxChunk';
 import removeRiffStructure from './removeRiffStructure/removeRiffStructure';
+import { VoxStructure } from '../types/types';
 
 
 const readVox = (buffer : Array<number> | Buffer) : VoxStructure =>

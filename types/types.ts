@@ -1,14 +1,14 @@
-type PACK = {
+export type PACK = {
     numModels: number;
 }
 
-type SIZE = {
+export type SIZE = {
     x: number,
     y: number,
     z: number,
 }
 
-type XYZI = {
+export type XYZI = {
     numVoxels: number,
     values: Array<{
         x: number,
@@ -18,7 +18,7 @@ type XYZI = {
     }>,
 }
 
-type RGBA = {
+export type RGBA = {
     values: Array<{
         r: number,
         g: number,
@@ -26,17 +26,17 @@ type RGBA = {
         a: number,
     }>,
 }
-type frameAttributes = {
+export type frameAttributes = {
     _r: string,
     _t: string,
     _f: string,
 }
 
-type nodeAttributes = {
+export type nodeAttributes = {
     _name: string,
     _hidden?: string,
 }
-type nTRN = {
+export type nTRN = {
     nodeId: number,
     nodeAttributes: nodeAttributes,
     child: number,
@@ -45,38 +45,38 @@ type nTRN = {
     numFrames: number,
     frames: frameAttributes[],
 }
-type nGRP = {
+export type nGRP = {
     nodeId: number,
     nodeAttributes: nodeAttributes,
     child: number,
     children: number[],
 }
-type modelAttributes = [number,{
+export type modelAttributes = [number,{
     _f: string,
 }]
-type nSHP = {
+export type nSHP = {
     nodeId: number,
     nodeAttributes: any,
     numModels: number,
     models: modelAttributes[],
 }
-type MATL = {
+export type MATL = {
     materialId: number,
     materialProperties: any,
 }
-type layerAttributes = {
+export type layerAttributes = {
     _name: string,
     _hidden?: string,
 }
-type LAYR = {
+export type LAYR = {
     layerId: number,
     layerAttributes: layerAttributes,
     reservedId: -1,
 }
-type rOBJ = {
+export type rOBJ = {
     renderAttributes: any,
 }
-type cameraAttributes = {
+export type cameraAttributes = {
     _mode: string,
     _focus: string,
     _angle: string,
@@ -84,27 +84,27 @@ type cameraAttributes = {
     _frustum: string,
     _fov: string,
 }
-type rCAM = {
+export type rCAM = {
     cameraId: number,
     cameraAttributes: cameraAttributes,
 }
-type NOTE = {
+export type NOTE = {
     numColorNames: number;
     colorNames: string[];
 }
-type IMAP = {
+export type IMAP = {
     size: number,
     indexAssociations: number[],
 }
 
-type VoxNode = {
+export type VoxNode = {
     id: string,
     data: any,
     children: Array<VoxNode>,
     index?: number,
 }
 
-type VoxStructure = {
+export type VoxStructure = {
     PACK?: PACK[],
     SIZE: SIZE[],
     XYZI: XYZI[],

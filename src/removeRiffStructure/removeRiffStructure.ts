@@ -1,6 +1,4 @@
-
-
-
+import { VoxNode } from "../../types/types";
 
 const removeRiffStructure = (riffObject : VoxNode) =>
 {

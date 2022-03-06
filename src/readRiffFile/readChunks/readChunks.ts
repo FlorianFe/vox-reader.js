@@ -2,6 +2,7 @@
 import readString from '../../shared/readString/readString';
 import readInt from '../../shared/readInt/readInt';
 import groupArray from '../../shared/groupArray/groupArray';
+import { VoxNode } from '../../../types/types';
 
 const BLOCK_SIZE = 4;
 const HEADER_SIZE = 12;

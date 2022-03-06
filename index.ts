@@ -1,2 +1,2 @@
-
-export = require('./src/readVox');
+import readVox from './src/readVox'
+export = readVox;
