@@ -1,10 +1,12 @@
 export declare type PACK = {
     numModels: number;
+    index?: number;
 };
 export declare type SIZE = {
     x: number;
     y: number;
     z: number;
+    index?: number;
 };
 export declare type XYZI = {
     numVoxels: number;
@@ -14,6 +16,7 @@ export declare type XYZI = {
         z: number;
         i: number;
     }>;
+    index?: number;
 };
 export declare type RGBA = {
     values: Array<{
@@ -22,6 +25,7 @@ export declare type RGBA = {
         b: number;
         a: number;
     }>;
+    index?: number;
 };
 export declare type frameAttributes = {
     _r: string;
@@ -40,12 +44,14 @@ export declare type nTRN = {
     layer: number;
     numFrames: number;
     frames: frameAttributes[];
+    index?: number;
 };
 export declare type nGRP = {
     nodeId: number;
     nodeAttributes: nodeAttributes;
     child: number;
     children: number[];
+    index?: number;
 };
 export declare type modelAttributes = [
     number,
@@ -58,10 +64,12 @@ export declare type nSHP = {
     nodeAttributes: any;
     numModels: number;
     models: modelAttributes[];
+    index?: number;
 };
 export declare type MATL = {
     materialId: number;
     materialProperties: any;
+    index?: number;
 };
 export declare type layerAttributes = {
     _name: string;
@@ -71,9 +79,11 @@ export declare type LAYR = {
     layerId: number;
     layerAttributes: layerAttributes;
     reservedId: -1;
+    index?: number;
 };
 export declare type rOBJ = {
     renderAttributes: any;
+    index?: number;
 };
 export declare type cameraAttributes = {
     _mode: string;
@@ -86,14 +96,17 @@ export declare type cameraAttributes = {
 export declare type rCAM = {
     cameraId: number;
     cameraAttributes: cameraAttributes;
+    index?: number;
 };
 export declare type NOTE = {
     numColorNames: number;
     colorNames: string[];
+    index?: number;
 };
 export declare type IMAP = {
     size: number;
     indexAssociations: number[];
+    index?: number;
 };
 export declare type VoxNode = {
     id: string;

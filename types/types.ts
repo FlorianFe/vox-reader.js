@@ -1,11 +1,13 @@
 export type PACK = {
-    numModels: number;
+    numModels: number,
+    index?: number,
 }
 
 export type SIZE = {
     x: number,
     y: number,
     z: number,
+    index?: number,
 }
 
 export type XYZI = {
@@ -16,6 +18,7 @@ export type XYZI = {
         z: number,
         i: number,
     }>,
+    index?: number,
 }
 
 export type RGBA = {
@@ -25,6 +28,7 @@ export type RGBA = {
         b: number,
         a: number,
     }>,
+    index?: number,
 }
 export type frameAttributes = {
     _r: string,
@@ -44,12 +48,14 @@ export type nTRN = {
     layer: number,
     numFrames: number,
     frames: frameAttributes[],
+    index?: number,
 }
 export type nGRP = {
     nodeId: number,
     nodeAttributes: nodeAttributes,
     child: number,
     children: number[],
+    index?: number,
 }
 export type modelAttributes = [number,{
     _f: string,
@@ -59,10 +65,12 @@ export type nSHP = {
     nodeAttributes: any,
     numModels: number,
     models: modelAttributes[],
+    index?: number,
 }
 export type MATL = {
     materialId: number,
     materialProperties: any,
+    index?: number,
 }
 export type layerAttributes = {
     _name: string,
@@ -72,9 +80,11 @@ export type LAYR = {
     layerId: number,
     layerAttributes: layerAttributes,
     reservedId: -1,
+    index?: number,
 }
 export type rOBJ = {
     renderAttributes: any,
+    index?: number,
 }
 export type cameraAttributes = {
     _mode: string,
@@ -87,14 +97,17 @@ export type cameraAttributes = {
 export type rCAM = {
     cameraId: number,
     cameraAttributes: cameraAttributes,
+    index?: number,
 }
 export type NOTE = {
-    numColorNames: number;
-    colorNames: string[];
+    numColorNames: number,
+    colorNames: string[],
+    index?: number,
 }
 export type IMAP = {
     size: number,
     indexAssociations: number[],
+    index?: number,
 }
 
 export type VoxNode = {
