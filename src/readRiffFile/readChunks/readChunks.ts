@@ -1,16 +1,11 @@
 
-const read4ByteString = require('../../shared/read4ByteString/read4ByteString');
-const read4ByteInteger = require('../../shared/read4ByteInteger/read4ByteInteger');
-const groupArray = require('../../shared/groupArray/groupArray');
+import readString from '../../shared/readString/readString';
+import readInt from '../../shared/readInt/readInt';
+import groupArray from '../../shared/groupArray/groupArray';
+import { VoxNode } from '../../../types/types';
 
 const BLOCK_SIZE = 4;
 const HEADER_SIZE = 12;
-
-type Node = {
-  id: string,
-  data: any,
-  children: Array<Node>,
-}
 
 const readChunks = (data : Array<number>, parser: Function) =>
 {
@@ -21,9 +16,9 @@ const readChunks = (data : Array<number>, parser: Function) =>
     const headerData = data.slice(0, HEADER_SIZE);
     const header = groupArray(headerData, BLOCK_SIZE);
 
-    const chunkId = read4ByteString(header[0]);
-    const contentBytes = read4ByteInteger(header[1]);
-    const childrenBytes = read4ByteInteger(header[2]);
+    const chunkId =  readString(header[0]) 
+    const contentBytes = readInt(header[1]);
+    const childrenBytes = readInt(header[2]);
 
     chunks.push(createChunk(data, chunkId, contentBytes, childrenBytes, parser));
 
@@ -33,14 +28,14 @@ const readChunks = (data : Array<number>, parser: Function) =>
   return chunks;
 }
 
-const createChunk = (data : Array<number>, id : string, contentBytes : number, childrenBytes : number, parser : Function) : Node =>
+const createChunk = (data : Array<number>, id : string, contentBytes : number, childrenBytes : number, parser : Function) : VoxNode =>
 {
   const contentDataEndIndex = HEADER_SIZE + contentBytes;
   const childrenDataEndIndex = contentDataEndIndex + childrenBytes;
 
   const contentData = data.slice(HEADER_SIZE, contentDataEndIndex);
   const childrenData = data.slice(contentDataEndIndex, childrenDataEndIndex);
-
+  
   return {
     id: id,
     data: parser(id, contentData),

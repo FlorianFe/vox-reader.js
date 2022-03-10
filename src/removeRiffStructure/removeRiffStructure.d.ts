@@ -1,10 +1,3 @@
-declare type Node = {
-    id: string;
-    data: any;
-    children: Array<Node>;
-};
-declare type Result = {
-    [key: string]: any;
-};
-declare const removeRiffStructure: (riffObject: Node) => Result;
+import { VoxNode } from "../../types/types";
+declare const removeRiffStructure: (riffObject: VoxNode) => any;
 export = removeRiffStructure;

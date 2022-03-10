@@ -1,2 +1,2 @@
-declare const _default: any;
-export = _default;
+import readVox from './src/readVox';
+export = readVox;

@@ -1,3 +1,2 @@
-/// <reference types="node" />
-declare const readRiffFile: (buffer: Array<number> | Buffer, offset: number, parser: Function) => any;
+declare const readRiffFile: (buffer: Array<number>, offset: number, parser: Function) => import("../../types/types").VoxNode;
 export = readRiffFile;

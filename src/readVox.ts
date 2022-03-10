@@ -1,11 +1,11 @@
 
-const read4ByteString = require('./shared/read4ByteString/read4ByteString');
-const read4ByteInteger = require('./shared/read4ByteInteger/read4ByteInteger');
-const groupArray = require('./shared/groupArray/groupArray');
-
-const readRiffFile = require('./readRiffFile/readRiffFile');
-const parseVoxChunk = require('./parseVoxChunk/parseVoxChunk');
-const removeRiffStructure = require('./removeRiffStructure/removeRiffStructure');
+import readString from './shared/readString/readString';
+import readInt from './shared/readInt/readInt';
+import groupArray from './shared/groupArray/groupArray';
+import readRiffFile from './readRiffFile/readRiffFile';
+import parseVoxChunk from './parseVoxChunk/parseVoxChunk';
+import removeRiffStructure from './removeRiffStructure/removeRiffStructure';
+import { VoxStructure } from '../types/types';
 
 
 const readVox = (buffer : Array<number> | Buffer) : VoxStructure =>
@@ -16,14 +16,14 @@ const readVox = (buffer : Array<number> | Buffer) : VoxStructure =>
   const data = [...buffer]; // convert buffer to array
   const tokens = groupArray(data, BLOCK_SIZE);
 
-  const id = read4ByteString(tokens[0]);
-  const version = read4ByteInteger(tokens[1]);
+  const id = readString(tokens[0]);
+  const version = readInt(tokens[1]);
 
   if(id != 'VOX ') throw Error(`Id of .vox-file should be "VOX ", found "${id}".`);
   if(version != 150) throw Error(`Version of .vox-file structure should be 150, found "${version}".`);
 
   const riffData = readRiffFile(data, OFFSET, parseVoxChunk);
-  
+  riffData.children = riffData.children.map((chunk: any, index: number) => ({ ...chunk, index }));
   return removeRiffStructure(riffData);
 }
 
