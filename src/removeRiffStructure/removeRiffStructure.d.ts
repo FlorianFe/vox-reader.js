@@ -1,3 +1,3 @@
-import { VoxNode } from "../../types/types";
-declare const removeRiffStructure: (riffObject: VoxNode) => any;
+import { VoxNode, VoxStructure } from "../../types/types";
+declare const removeRiffStructure: (riffObject: VoxNode) => VoxStructure;
 export = removeRiffStructure;

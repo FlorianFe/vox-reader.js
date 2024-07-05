@@ -1,23 +1,27 @@
-import { VoxNode } from "../../types/types";
+import { VoxNode, VoxStructure } from "../../types/types";
 
-const removeRiffStructure = (riffObject : VoxNode) =>
-{
-    let result : any = {};
+type Node = {
+  id: string;
+  data: any;
+  children: Array<Node>;
+};
 
-    riffObject.children.forEach((child : VoxNode) => 
-    {
-        let list = result[child.id];
-        if(!list) list = [];
-        list.push(removeRiffStructure(child));
-        result[child.id] = list;
-    });
+type Result = {
+  [key: string]: any;
+};
 
-    Object.entries(riffObject.data).forEach(([key, value]) => 
-    {
-        result[key] = value;
-    });
-    result.index = riffObject.index;
-    return result;
-}
+const removeRiffStructure = (riffObject: VoxNode) => {
+  let result: Result = {};
+
+  riffObject.children.forEach((child: Node) => {
+    result[child.id.toLowerCase()] = removeRiffStructure(child);
+  });
+
+  Object.entries(riffObject.data).forEach(([key, value]) => {
+    result[key] = value;
+  });
+
+  return result as VoxStructure;
+};
 
 export = removeRiffStructure;

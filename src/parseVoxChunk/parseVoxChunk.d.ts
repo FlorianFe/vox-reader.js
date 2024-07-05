@@ -2,7 +2,7 @@ declare const parseVoxChunk: (id: string, contentData: Array<number>) => {
     nodeId: number;
     nodeAttributes: {
         _name: string;
-        _hidden?: 0 | 1 | undefined;
+        _hidden?: 0 | 1;
     };
     child: number;
     reserved: number;
@@ -15,7 +15,7 @@ declare const parseVoxChunk: (id: string, contentData: Array<number>) => {
     nodeId: number;
     nodeAttributes: {
         _name: string;
-        _hidden?: 0 | 1 | undefined;
+        _hidden?: 0 | 1;
     };
     child: number;
     children: number[];

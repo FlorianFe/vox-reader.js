@@ -1,15 +1,12 @@
+import readString from "./shared/readString/readString";
+import readInt from "./shared/readInt/readInt";
+import groupArray from "./shared/groupArray/groupArray";
+import readRiffFile from "./readRiffFile/readRiffFile";
+import parseVoxChunk from "./parseVoxChunk/parseVoxChunk";
+import removeRiffStructure from "./removeRiffStructure/removeRiffStructure";
+import { VoxStructure } from "../types/types";
 
-import readString from './shared/readString/readString';
-import readInt from './shared/readInt/readInt';
-import groupArray from './shared/groupArray/groupArray';
-import readRiffFile from './readRiffFile/readRiffFile';
-import parseVoxChunk from './parseVoxChunk/parseVoxChunk';
-import removeRiffStructure from './removeRiffStructure/removeRiffStructure';
-import { VoxStructure } from '../types/types';
-
-
-const readVox = (buffer : Array<number> | Buffer) : VoxStructure =>
-{
+const readVox = (buffer: Array<number> | Buffer): VoxStructure => {
   const BLOCK_SIZE = 4;
   const OFFSET = 8; // VOX <space> 150 0 0 0
 
@@ -19,12 +16,20 @@ const readVox = (buffer : Array<number> | Buffer) : VoxStructure =>
   const id = readString(tokens[0]);
   const version = readInt(tokens[1]);
 
-  if(id != 'VOX ') throw Error(`Id of .vox-file should be "VOX ", found "${id}".`);
-  if(version != 150) throw Error(`Version of .vox-file structure should be 150, found "${version}".`);
+  if (id != "VOX ")
+    throw Error(`Id of .vox-file should be "VOX ", found "${id}".`);
+  if (version < 150)
+    throw Error(
+      `Version of .vox-file structure should be at least 150, found "${version}".`
+    );
 
   const riffData = readRiffFile(data, OFFSET, parseVoxChunk);
-  riffData.children = riffData.children.map((chunk: any, index: number) => ({ ...chunk, index }));
+  riffData.children = riffData.children.map((chunk: any, index: number) => ({
+    ...chunk,
+    index,
+  }));
+
   return removeRiffStructure(riffData);
-}
+};
 
 export = readVox;
