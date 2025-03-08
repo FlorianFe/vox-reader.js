@@ -1,6 +1,6 @@
 {
   "name": "vox-reader",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Takes a Byte Array of .vox file data and returns a JavaScript Object with all the containing informations",
   "main": "index.js",
   "scripts": {
@@ -35,5 +35,8 @@
   },
   "ava": {
     "timeout": "2m"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
   }
 }
