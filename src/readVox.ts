@@ -6,7 +6,7 @@ import parseVoxChunk from "./parseVoxChunk/parseVoxChunk";
 import removeRiffStructure from "./removeRiffStructure/removeRiffStructure";
 import { VoxStructure } from "../types/types";
 
-const readVox = (buffer: Array<number> | Buffer): VoxStructure => {
+const readVox = (buffer: Array<number> | Uint8Array): VoxStructure => {
   const BLOCK_SIZE = 4;
   const OFFSET = 8; // VOX <space> 150 0 0 0
 

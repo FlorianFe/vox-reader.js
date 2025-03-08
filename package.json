@@ -1,6 +1,10 @@
 {
   "name": "vox-reader",
+<<<<<<< HEAD
   "version": "4.0.0",
+=======
+  "version": "3.0.2",
+>>>>>>> b3897290baf811fb4cc51ccdda130f82b855019e
   "description": "Takes a Byte Array of .vox file data and returns a JavaScript Object with all the containing informations",
   "main": "index.js",
   "scripts": {
