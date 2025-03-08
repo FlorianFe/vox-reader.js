@@ -28,7 +28,7 @@ const createChunk = (data, id, contentBytes, childrenBytes, parser) => {
     return {
         id: id,
         data: parser(id, contentData),
-        children: readChunks(childrenData, parser)
+        children: readChunks(childrenData, parser),
     };
 };
 module.exports = readChunks;

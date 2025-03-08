@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
+const util_1 = __importDefault(require("util"));
 const ava_1 = __importDefault(require("ava"));
 const vox_saver_1 = __importDefault(require("vox-saver"));
 const index_1 = __importDefault(require("../index"));
@@ -19,6 +20,12 @@ const json_diff_1 = require("json-diff");
     const rawDifference = (0, json_diff_1.diff)(Array(...buffer), writtenVox);
     t.assert(rawDifference === undefined, "vox-reader and vox-writer should be the same (handling extended files) RAW:\n" +
         rawDifference);
+    t.pass();
+});
+(0, ava_1.default)("test tree.vox", (t) => {
+    const buffer = fs_1.default.readFileSync("./test/tree.vox");
+    const vox = (0, index_1.default)(buffer);
+    console.log(util_1.default.inspect(vox));
     t.pass();
 });
 /*

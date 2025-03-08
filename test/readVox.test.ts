@@ -25,6 +25,15 @@ test("test deer.vox", (t: any) => {
   t.pass();
 });
 
+test("test tree.vox", (t: any) => {
+  const buffer = fs.readFileSync("./test/tree.vox");
+  const vox = readVox(buffer);
+
+  console.log(util.inspect(vox));
+
+  t.pass();
+});
+
 /*
 
 // This test just doesn't work at the moment, because the reader does more than the writer

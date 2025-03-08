@@ -18,10 +18,6 @@ const readVox = (buffer: Array<number> | Buffer): VoxStructure => {
 
   if (id != "VOX ")
     throw Error(`Id of .vox-file should be "VOX ", found "${id}".`);
-  if (version < 150)
-    throw Error(
-      `Version of .vox-file structure should be at least 150, found "${version}".`
-    );
 
   const riffData = readRiffFile(data, OFFSET, parseVoxChunk);
   riffData.children = riffData.children.map((chunk: any, index: number) => ({
